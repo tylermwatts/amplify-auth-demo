@@ -1,7 +1,6 @@
 import React from 'react';
 import Amplify, { Auth, Hub } from 'aws-amplify';
 import config from '../aws-exports';
-import Link from 'next/link';
 import Header from './Header';
 
 Amplify.configure(config);
