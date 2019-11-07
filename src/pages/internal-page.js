@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import UserContext from '../components/UserContext';
+import UserContext from '../context/UserContext';
 import Header from '../components/Header';
 
 const Index = () => {
