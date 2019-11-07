@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import dynamic from 'next/dynamic';
-import UserContext from '../components/UserContext';
+import UserContext from '../context/UserContext';
 
 const AppWithoutSSR = dynamic(import('../components/App'), {
 	ssr: false,

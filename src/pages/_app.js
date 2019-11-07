@@ -1,6 +1,6 @@
 import React from 'react';
 import App from 'next/app';
-import UserContext from '../components/UserContext';
+import UserContext from '../context/UserContext';
 
 class AmplifyAuthApp extends App {
 	state = {

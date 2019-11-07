@@ -4,19 +4,7 @@ import config from '../aws-exports';
 import Link from 'next/link';
 import Header from './Header';
 
-Amplify.configure({
-	...config,
-	Auth: {
-		identityPoolId: 'us-east-1:dd56595d-7e10-423a-b9dc-626e2643505e',
-		region: 'us-east-1',
-		userPoolId: 'us-east-1_pX7wp5eiW',
-		userPoolWebClientId: '77mklosubvtm9puioo74cgm50o',
-		cookieStorage: {
-			domain: 'localhost',
-			secure: false,
-		},
-	},
-});
+Amplify.configure(config);
 
 const App = props => {
 	const [user, setUser] = props.state;
@@ -76,11 +64,6 @@ const App = props => {
 			{!user && <button onClick={userSignIn}>Sign In</button>}
 			<button onClick={checkUser}>Check User</button>
 			{user && <button onClick={signOut}>Sign Out</button>}
-			{user && (
-				<Link href='/internal-page'>
-					<a>Internal Page</a>
-				</Link>
-			)}
 		</div>
 	);
 };
