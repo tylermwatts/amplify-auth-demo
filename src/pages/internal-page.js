@@ -7,7 +7,7 @@ const Index = () => {
 
 	useEffect(() => {
 		const user = JSON.parse(localStorage.getItem('cognitoUser'));
-		console.log('internal page', user);
+		context.setUser(user);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 

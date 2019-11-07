@@ -42,6 +42,9 @@ const App = props => {
 				setUser(user);
 			} catch (err) {
 				console.log(err);
+				if (err === 'not authenticated') {
+					localStorage.setItem('cognitoUser', null);
+				}
 			}
 		};
 		getAuthUser();
