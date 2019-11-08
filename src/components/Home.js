@@ -15,7 +15,7 @@ const Home = props => {
 					setUser(data);
 					break;
 				case 'signOut':
-					localStorage.setItem('cognitoUser', JSON.stringify(data));
+					localStorage.setItem('cognitoUser', null);
 					setUser(null);
 					break;
 				default:
