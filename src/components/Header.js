@@ -8,7 +8,7 @@ const linkStyle = {
 const Header = () => (
 	<div>
 		<Link href='/'>
-			<a style={linkStyle}>Main</a>
+			<a style={linkStyle}>Home</a>
 		</Link>
 		<Link href='/internal-page'>
 			<a style={linkStyle}>Internal Tools</a>

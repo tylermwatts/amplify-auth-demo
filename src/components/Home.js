@@ -5,7 +5,7 @@ import Header from './Header';
 
 Amplify.configure(config);
 
-const App = props => {
+const Home = props => {
 	const [user, setUser] = props.state;
 	React.useEffect(() => {
 		Hub.listen('auth', ({ payload: { event, data } }) => {
@@ -67,4 +67,4 @@ const App = props => {
 	);
 };
 
-export default App;
+export default Home;
