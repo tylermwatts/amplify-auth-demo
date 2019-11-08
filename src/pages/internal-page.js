@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import UserContext from '../context/UserContext';
 import Header from '../components/Header';
 
-const Index = () => {
+const InternalPage = () => {
 	const context = useContext(UserContext);
 
 	useEffect(() => {
@@ -19,4 +19,4 @@ const Index = () => {
 	);
 };
 
-export default Index;
+export default InternalPage;
