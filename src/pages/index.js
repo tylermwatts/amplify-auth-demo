@@ -8,10 +8,10 @@ const HomeWithoutSSR = dynamic(import('../components/Home'), {
 });
 
 const Index = props => {
-	const { user, setUser } = useContext(UserContext);
+	const { user, signIn, signOut, checkUser } = useContext(UserContext);
 	return (
 		<>
-			<HomeWithoutSSR state={[user, setUser]} />
+			<HomeWithoutSSR state={[user, signIn, signOut, checkUser]} />
 		</>
 	);
 };
