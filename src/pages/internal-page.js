@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import UserContext from '../context/UserContext';
 import Header from '../components/Header';
+import awsConfig from '../aws-exports';
 
 const InternalPage = () => {
 	const context = useContext(UserContext);
@@ -14,7 +15,12 @@ const InternalPage = () => {
 	return (
 		<>
 			<Header />
-			{context.user ? <div>Success!</div> : <div>Not authorized.</div>}
+			{context.user &&
+			context.user.pool.clientId === awsConfig.aws_user_pools_web_client_id ? (
+				<div>Success!</div>
+			) : (
+				<div>Not authorized.</div>
+			)}
 		</>
 	);
 };
