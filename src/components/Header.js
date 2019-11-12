@@ -1,19 +1,21 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
 import Link from 'next/link';
+import React from 'react';
 
 const linkStyle = {
 	marginRight: 15,
 };
 
-const Header = () => (
+const Header = ({ userId }) => (
 	<div>
 		<Link href='/'>
 			<a style={linkStyle}>Home</a>
 		</Link>
-		<Link href='/internal-page'>
-			<a style={linkStyle}>Internal Tools</a>
-		</Link>
+		{userId && (
+			<Link href='/internal-page'>
+				<a style={linkStyle}>Internal Tools</a>
+			</Link>
+		)}
 	</div>
 );
 

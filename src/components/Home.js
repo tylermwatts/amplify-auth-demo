@@ -1,46 +1,38 @@
-import React from 'react';
 import Amplify, { Auth, Hub } from 'aws-amplify';
+import { parseCookies } from 'nookies';
+import React from 'react';
 import config from '../aws-exports';
 import Header from './Header';
 
 Amplify.configure(config);
 
-const Home = props => {
-	const [user, setUser] = props.state;
+const Home = ({ userId, setUserId }) => {
 	React.useEffect(() => {
 		Hub.listen('auth', ({ payload: { event, data } }) => {
 			switch (event) {
 				case 'signIn':
-					localStorage.setItem('cognitoUser', JSON.stringify(data));
-					setUser(data);
+					if (userId === undefined) {
+						setUserId(data.username);
+					}
 					break;
 				case 'signOut':
-					localStorage.setItem('cognitoUser', null);
-					setUser(null);
+					setUserId(null);
 					break;
 				default:
 					return;
 			}
 		});
-		const getAuthUser = async () => {
-			try {
-				const user = await Auth.currentAuthenticatedUser();
-				localStorage.setItem('cognitoUser', JSON.stringify(user));
-				setUser(user);
-			} catch (err) {
-				console.log(err);
-				if (err === 'not authenticated') {
-					localStorage.setItem('cognitoUser', null);
-				}
-			}
-		};
-		getAuthUser();
 		return () => Hub.remove('auth');
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const checkUser = () => {
-		console.log(user);
+		console.log(userId);
+	};
+
+	const logCookie = () => {
+		const myCookies = parseCookies();
+		console.log(myCookies);
 	};
 
 	const userSignIn = async () => {
@@ -51,18 +43,18 @@ const Home = props => {
 		}
 	};
 
-	const signOut = () => {
-		localStorage.setItem('cognitoUser', null);
+	const userSignOut = () => {
 		Auth.signOut();
 	};
 
 	return (
 		<div>
-			<Header />
+			<Header userId={userId} />
 			<p>This is the home page</p>
-			{!user && <button onClick={userSignIn}>Sign In</button>}
+			{!userId && <button onClick={userSignIn}>Sign In</button>}
 			<button onClick={checkUser}>Check User</button>
-			{user && <button onClick={signOut}>Sign Out</button>}
+			{userId && <button onClick={userSignOut}>Sign Out</button>}
+			<button onClick={logCookie}>Log Cookie</button>
 		</div>
 	);
 };

@@ -1,19 +1,20 @@
-import React, { useContext } from 'react';
 import dynamic from 'next/dynamic';
-import UserContext from '../context/UserContext';
+import React from 'react';
+import withCookieAuth from '../components/withCookieAuth';
 
 const HomeWithoutSSR = dynamic(import('../components/Home'), {
 	ssr: false,
 	loading: () => <div>Loading...</div>,
 });
 
-const Index = props => {
-	const { user, setUser } = useContext(UserContext);
+const Index = ({ userId }) => {
+	const [localUserId, setLocalUserId] = React.useState(userId);
+
 	return (
 		<>
-			<HomeWithoutSSR state={[user, setUser]} />
+			<HomeWithoutSSR userId={localUserId} setUserId={setLocalUserId} />
 		</>
 	);
 };
 
-export default Index;
+export default withCookieAuth(Index);
